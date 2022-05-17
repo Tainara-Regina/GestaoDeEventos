@@ -1,6 +1,19 @@
-version: "3.7"
+version: "3.9"
 
 services:
+  database_gestao_evento:
+    image: postgres
+    container_name: database_gestao_evento
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=gestao
+      - POSTGRES_DB=gestaodeevento
+    volumes:
+      - pgdata:/data/postgres
+    
   app:
     build: .
     container_name: gestaodeevento
@@ -8,3 +21,11 @@ services:
       - 3333:3333
     volumes:
       - .:/usr/app
+    links:
+      - database_gestao_evento
+    depends_on:
+      - database_gestao_evento
+
+volumes:
+  pgdata:
+    driver: local
