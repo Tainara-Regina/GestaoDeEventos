@@ -4,6 +4,13 @@
     "host": "localhost",
     "username": "docker",
     "password": "gestao",
-    "database":"gestaodeevento"
+    "database":"gestaodeevento",
+    "migrations": ["./src/database/migrations/*.ts"],
+    "entities":   ["./src/entities/*.ts"],
+
+    "cli": {
+        "migrationsDir": "./src/database/migrations",
+        "entitiesDir":   "./src/entities"
+    }
 
 }

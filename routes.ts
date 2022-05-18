@@ -25,7 +25,7 @@ routes.post('/criador',criadorController.createUser)
 routes.post('/evento',eventoController.createEvento)
 routes.get('/evento',eventoController.readEvento)
 routes.put('/evento',eventoController.updateEvento)
-routes.delete('/evento',eventoController.deleteEvento)
+routes.delete('/evento/:id',eventoController.deleteEvento)
 
 /*
   Rotas de Ingresso
