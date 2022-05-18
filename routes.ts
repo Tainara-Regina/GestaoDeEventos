@@ -24,7 +24,7 @@ routes.post('/criador',criadorController.createUser)
 
 routes.post('/evento',eventoController.createEvento)
 routes.get('/evento',eventoController.readEvento)
-routes.put('/evento',eventoController.updateEvento)
+routes.put('/evento/:id',eventoController.updateEvento)
 routes.delete('/evento/:id',eventoController.deleteEvento)
 
 /*

@@ -71,4 +71,20 @@ await repo.save(evento);
         return true;
     }
 
+
+    async updateEvent(id: string ,endereco?: string, descricao?: string){
+        const repo = getRepository(Evento);
+        const evento = await repo.findOne(id);
+        console.log(evento);
+        if(!evento){
+            return new Error("evento não encontrado");
+        }
+
+        evento.endereco = endereco ? endereco : evento.endereco;
+        evento.descricao = descricao ? descricao : evento.descricao;
+
+        await repo.save(evento);
+        return evento;
+            
+    }
 }

@@ -58,7 +58,16 @@ import { eventoService } from '../services/eventoService';
      
 
      async updateEvento(req:Request, res: Response){
-        return res.json("Atualizo o evento");
+      const {id} = req.params;
+      const {endereco, descricao} = req.body;
+      const service = new eventoService;
+
+      const result = await service.updateEvent(id,endereco,descricao);
+      
+      if(result instanceof Error){
+         return res.status(400).json({"erro": result.message})
+     }
+     return res.status(200).json({"menssage":"Evento atualizado com sucesso!"});
     },
 
      async deleteEvento(req:Request, res: Response){
