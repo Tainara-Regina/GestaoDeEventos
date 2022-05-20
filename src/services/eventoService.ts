@@ -72,7 +72,7 @@ await repo.save(evento);
     }
 
 
-    async updateEvent(id: string ,endereco?: string, descricao?: string){
+    async updateEvent(id: string ,endereco?: string, descricao?: string, qtd_ingressos?:number){
         const repo = getRepository(Evento);
         const evento = await repo.findOne(id);
         console.log(evento);
@@ -80,8 +80,11 @@ await repo.save(evento);
             return new Error("evento não encontrado");
         }
 
+        console.log("quantidade de ingresso parametro", qtd_ingressos )
+
         evento.endereco = endereco ? endereco : evento.endereco;
         evento.descricao = descricao ? descricao : evento.descricao;
+        evento.qtd_ingressos = qtd_ingressos ? qtd_ingressos : evento.qtd_ingressos;
 
         await repo.save(evento);
         return evento;

@@ -1,15 +1,19 @@
-
+import { clienteAuthenticateVerify } from './src/login/midleware/clienteAuthenticateVerify';
 import clienteController from './src/controllers/clienteController';
 import criadorController from './src/controllers/criadorController';
 import eventoController from './src/controllers/eventoController';
 import ingressoController from './src/controllers/ingressoController';
+import authenticateController from './src/controllers/authenticateController';
+
 
 import {Router} from "express"
+import { criadorAuthenticateVerify } from './src/login/midleware/criadorAuthenticateVerify';
+
 
 const routes = Router();
 
 /*
-  Rotas Criador de Evento
+  Rotas Cliente
 */
 routes.post('/cliente',clienteController.createUser)
 
@@ -22,15 +26,23 @@ routes.post('/criador',criadorController.createUser)
   Rotas de Evento
 */
 
-routes.post('/evento',eventoController.createEvento)
+routes.post('/evento',criadorAuthenticateVerify,eventoController.createEvento)
 routes.get('/evento',eventoController.readEvento)
-routes.put('/evento/:id',eventoController.updateEvento)
-routes.delete('/evento/:id',eventoController.deleteEvento)
+routes.put('/evento/:id',criadorAuthenticateVerify,eventoController.updateEvento)
+routes.delete('/evento/:id',criadorAuthenticateVerify,eventoController.deleteEvento)
 
 /*
   Rotas de Ingresso
 */
-routes.post('/ingresso',ingressoController.createCompraIngresso)
+routes.post('/ingresso',clienteAuthenticateVerify,ingressoController.createCompraIngresso)
+routes.get('/ingresso/:usu_cliente_id',clienteAuthenticateVerify,ingressoController.readCompraIngresso)
+
+
+/*
+  Login 
+*/
+routes.post('/login/cliente',authenticateController.authenticateCliente)
+routes.post('/login/criador',authenticateController.authenticateCriador)
 
 export default routes
 
