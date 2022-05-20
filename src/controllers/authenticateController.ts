@@ -10,7 +10,7 @@ export default {
        if(verify instanceof Error) {
           return res.status(401).json({"error": verify.message})
        }
-
+       
        return res.status(200).json({"mensage": "login efetuado com sucesso", verify})
      
     },

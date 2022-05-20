@@ -18,6 +18,6 @@ export default {
            return res.status(400).json({"erro": result.message})
        }
 
-        return res.status(200).json({"menssage":"Criador cadastrado com sucesso", result});
+        return res.status(200).json({"menssage":"Criador cadastrado com sucesso"});
     }
 };

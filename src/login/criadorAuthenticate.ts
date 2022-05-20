@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm"
 import { Criador } from "../entities/criador" 
 import { sign } from "jsonwebtoken"
+import { compare } from "bcryptjs"
 
 
 export class criadorAuthenticate {
@@ -14,12 +15,15 @@ export class criadorAuthenticate {
         return new Error ("Usuario ou senha incorreto")
     }
 
-    const findSenha = await repo.findOne({senha})
-    if(!findSenha){
-     return new Error ("Usuario ou senha incorreto")
-}
- 
-   
+
+
+    const compararSenha =  compare(senha,findEmail.senha)
+
+    if(!compararSenha){
+      return new Error ("Usuario ou senha incorreto")
+ }
+ // const { id, user_type_id, level } = jwt.decode(token);
+  
     const id = findEmail.usu_criador_id; 
     const token =  sign({ id }, '6a2d7b78-4ec4-49f4-a6c7-1594952ee8d7', {
       expiresIn: 300 // expira em 5min
