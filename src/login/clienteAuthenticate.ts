@@ -17,7 +17,7 @@ export class clienteAuthenticate {
     }
 
 
-    const compararSenha =  compare(senha,findEmail.senha)
+    const compararSenha = await compare(senha,findEmail.senha)
 
     if(!compararSenha){
      return new Error ("Usuario ou senha incorreto")

@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { Criador } from "../entities/criador";
+import {hash} from "bcryptjs";
 
 type Usuario =
 {
@@ -16,9 +17,14 @@ export class criadorService {
           return new Error("email já cadastrado");
       }
 
+      const passHash = await hash(senha,8)
+
       const criador =  repo.create({
-         nome,email,senha
+         nome,
+         email,
+         senha:passHash
      });
+
 
      await repo.save(criador);
      return criador;

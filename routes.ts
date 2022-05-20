@@ -44,7 +44,5 @@ routes.post('/login/cliente',authenticateController.authenticateCliente)
 routes.post('/login/criador',authenticateController.authenticateCriador)
 
 
-//routes.get('/ingresso',adminCriadorController.getAllIngressos)
-
 export default routes
 
