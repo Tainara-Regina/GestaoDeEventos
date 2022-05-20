@@ -1,7 +1,7 @@
 
 import { getRepository } from "typeorm"
 import { Cliente } from "../entities/cliente"
-import { sign} from "jsonwebtoken"
+import { sign } from "jsonwebtoken"
 import { compare } from "bcryptjs"
 
 

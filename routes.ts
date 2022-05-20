@@ -4,10 +4,9 @@ import criadorController from './src/controllers/criadorController';
 import eventoController from './src/controllers/eventoController';
 import ingressoController from './src/controllers/ingressoController';
 import authenticateController from './src/controllers/authenticateController';
-
-
-import {Router} from "express"
 import { criadorAuthenticateVerify } from './src/login/midleware/criadorAuthenticateVerify';
+import {Router} from "express"
+
 
 
 const routes = Router();
@@ -35,7 +34,7 @@ routes.delete('/evento/:id',criadorAuthenticateVerify,eventoController.deleteEve
   Rotas de Ingresso
 */
 routes.post('/ingresso',clienteAuthenticateVerify,ingressoController.createCompraIngresso)
-routes.get('/ingresso/:usu_cliente_id',clienteAuthenticateVerify,ingressoController.readCompraIngresso)
+routes.get('/ingresso',clienteAuthenticateVerify,ingressoController.readCompraIngresso)
 
 
 /*
@@ -43,6 +42,9 @@ routes.get('/ingresso/:usu_cliente_id',clienteAuthenticateVerify,ingressoControl
 */
 routes.post('/login/cliente',authenticateController.authenticateCliente)
 routes.post('/login/criador',authenticateController.authenticateCriador)
+
+
+//routes.get('/ingresso',adminCriadorController.getAllIngressos)
 
 export default routes
 

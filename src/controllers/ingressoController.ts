@@ -4,9 +4,12 @@ import { ingressoService } from "../services/ingressoService"
 
 export default {
    async createCompraIngresso (req: Request, res: Response){
-   const {evento_id, usu_cliente_id} = req.body;
+   const {evento_id} = req.body;
+   const {id} = req;
+   const usu_cliente_id = id;
+   console.log("bateeeeeu e trouxe id",id);
      
-   if(!evento_id || !usu_cliente_id){
+   if(!evento_id){
         return res.status(400).json("parametros inválidos");
    }
 
@@ -25,7 +28,8 @@ export default {
     },
 
    async readCompraIngresso (req: Request, res: Response) {
-       const {usu_cliente_id} = req.params;
+       const {id} = req;
+       const usu_cliente_id = id;
      
        const service = new ingressoService;
        const result = await service.read(usu_cliente_id);

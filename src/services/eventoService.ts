@@ -46,7 +46,7 @@ const evento = repo.create({
 });
 
  
-if(isNaN(usu_criador_id)||isNaN(qtd_ingressos)){
+if(isNaN(qtd_ingressos)){
     return new Error("usu_criador_id e qtd_ingressos precisam ser numericos");
 }
 
@@ -72,15 +72,16 @@ await repo.save(evento);
     }
 
 
-    async updateEvent(id: string ,endereco?: string, descricao?: string, qtd_ingressos?:number){
+    async updateEvent(usu_criador_id:number,id: string ,endereco?: string, descricao?: string, qtd_ingressos?:number){
         const repo = getRepository(Evento);
-        const evento = await repo.findOne(id);
-        console.log(evento);
+        const evento = await repo.findOne(id);;
         if(!evento){
             return new Error("evento não encontrado");
         }
 
-        console.log("quantidade de ingresso parametro", qtd_ingressos )
+        if(evento.usu_criador_id !== usu_criador_id){
+            return new Error("este evento não pertence a este criador");
+        }
 
         evento.endereco = endereco ? endereco : evento.endereco;
         evento.descricao = descricao ? descricao : evento.descricao;

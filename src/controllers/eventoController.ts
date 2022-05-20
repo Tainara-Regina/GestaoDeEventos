@@ -6,7 +6,6 @@ import { eventoService } from '../services/eventoService';
  export default {
     async createEvento (req:Request, res: Response){
      const {nome_evento,
-      usu_criador_id,
       qtd_ingressos,
       descricao,
       endereco,
@@ -15,7 +14,6 @@ import { eventoService } from '../services/eventoService';
       valor} = req.body;
 
       if(!nome_evento ||
-         !usu_criador_id ||
          !qtd_ingressos ||
          !descricao ||
          !endereco ||
@@ -29,7 +27,7 @@ import { eventoService } from '../services/eventoService';
 
       const result = await service.createEvent({
       nome_evento,
-      usu_criador_id,
+      usu_criador_id : req.id,
       qtd_ingressos,
       descricao,
       endereco,
@@ -62,7 +60,7 @@ import { eventoService } from '../services/eventoService';
       const {endereco, descricao, qtd_ingressos} = req.body;
       const service = new eventoService;
 
-      const result = await service.updateEvent(id,endereco,descricao,qtd_ingressos);
+      const result = await service.updateEvent(req.id,id,endereco,descricao,qtd_ingressos);
       
       if(result instanceof Error){
          return res.status(400).json({"erro": result.message})

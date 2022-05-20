@@ -1,5 +1,5 @@
 import { NextFunction, Request, response, Response } from "express";
-import { verify } from "jsonwebtoken";
+import { verify,decode } from "jsonwebtoken";
 
 export function criadorAuthenticateVerify
 (req:Request, res:Response, next:NextFunction) {
@@ -12,6 +12,10 @@ export function criadorAuthenticateVerify
     }
 
     const [,token] = authToken.split(" ");
+
+    const usu_id = decode(token);
+    req.id = usu_id.id;
+
 
     try {
         verify(token, '6a2d7b78-4ec4-49f4-a6c7-1594952ee8d7');
