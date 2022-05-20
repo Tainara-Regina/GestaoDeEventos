@@ -26,7 +26,7 @@ export class clienteAuthenticate {
    
     const id = findEmail.usu_cliente_id; 
     const token =  sign({ id }, 'd7500a4c-6a9c-400c-8e58-0cc04d57be28', {
-      expiresIn: 300 // expires in 5min
+      expiresIn: 900 // expira em 15min
     }); 
 
 

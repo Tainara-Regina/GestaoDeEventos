@@ -26,7 +26,7 @@ export class criadorAuthenticate {
   
     const id = findEmail.usu_criador_id; 
     const token =  sign({ id }, '6a2d7b78-4ec4-49f4-a6c7-1594952ee8d7', {
-      expiresIn: 300 // expira em 5min
+      expiresIn: 900 // expira em 15min
     });
 
 
